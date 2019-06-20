@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            mc:Ignorable="d"
+            x:Class="CurrencyCalculator.MainPage"
+            xmlns:local="clr-namespace:CurrencyCalculator">
+    <TabbedPage.BackgroundColor>
+        <OnPlatform x:TypeArguments="Color"
+                    Android="#F5F5F5"/>
+    </TabbedPage.BackgroundColor>
+
+    <local:CalculatorPage Title="Calculator">
+        <local:CalculatorPage.IconImageSource>
+            <OnPlatform x:TypeArguments="FileImageSource"
+                        WinPhone="Resources/Images/estimate_96px.png"
+                        Android="estimate.png"/>
+        </local:CalculatorPage.IconImageSource>
+    </local:CalculatorPage>
+
+
+    <local:HistoryPage Title="History">
+        <local:HistoryPage.IconImageSource>
+            <OnPlatform x:TypeArguments="FileImageSource"
+                        WinPhone="Resources/Images/past_96px.png"
+                        Android="time_machine.png"/>
+        </local:HistoryPage.IconImageSource>
+    </local:HistoryPage>
+</TabbedPage>

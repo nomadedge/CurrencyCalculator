@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="CurrencyCalculator.CalculatorPage"
+             x:Name="ThisPage"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Button">
+                <Setter Property="FontSize" Value="Large"/>
+                <Setter Property="IsEnabled" Value="{Binding IsRatesLoaded}"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="BorderColor">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="Color"
+                                    Android="#F5F5F5"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="BackgroundColor">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="Color"
+                                    Android="#F5F5F5"/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="FontSize" Value="Medium"/>
+            </Style>
+            <Style TargetType="Picker">
+                <Setter Property="WidthRequest" Value="160"/>
+                <Setter Property="IsEnabled" Value="{Binding IsRatesLoaded}"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <AbsoluteLayout>
+        <BoxView BackgroundColor="#E1E1E1"
+                 AbsoluteLayout.LayoutBounds="0, 0, 1, 0.435"
+                 AbsoluteLayout.LayoutFlags="All">
+            <BoxView.BackgroundColor>
+                <OnPlatform x:TypeArguments="Color"
+                            Android="#E1E1E1"
+                            WinPhone="Transparent"/>
+            </BoxView.BackgroundColor>
+        </BoxView>
+
+        <Grid AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+              AbsoluteLayout.LayoutFlags="All">
+
+            <Grid.Padding>
+                <OnPlatform x:TypeArguments="Thickness"
+                            WinPhone="0, 10"/>
+            </Grid.Padding>
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+
+            <StackLayout Orientation="Horizontal"
+                         VerticalOptions="Center"
+                         Grid.Row="0"
+                         Grid.ColumnSpan="4">
+
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness"
+                                Android="5, 0"/>
+                </StackLayout.Padding>
+                
+                <Label Text="Date"
+                       VerticalOptions="Center"/>
+                <DatePicker HorizontalOptions="EndAndExpand"
+                            MinimumDate="01/01/1999"
+                            MaximumDate="{x:Static sys:DateTime.Today}"
+                            Date="{Binding RateDate, Mode=OneWayToSource}"
+                            IsEnabled="{Binding IsLoaded}"/>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal"
+                         VerticalOptions="Center"
+                         Grid.Row="1"
+                         Grid.ColumnSpan="4">
+
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness"
+                                Android="5, 0"/>
+                </StackLayout.Padding>
+
+                <StackLayout>
+                    <Label Text="From" FontSize="Default"/>
+                    <Picker ItemsSource="{Binding CurrenciesNames}"
+                        SelectedItem="{Binding CurrencyFrom}"/>
+                </StackLayout>
+
+                <ScrollView Orientation="Horizontal"
+                            HorizontalOptions="EndAndExpand"
+                            VerticalOptions="End">
+                <Label Text="{Binding Amount}"
+                       TextColor="{Binding Source={x:Reference Name=ThisPage},
+                                           Path=AmountsColor}"
+                       HorizontalOptions="EndAndExpand"/>
+                </ScrollView>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal"
+                         VerticalOptions="Center"
+                         Grid.Row="2"
+                         Grid.ColumnSpan="4">
+
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness"
+                                Android="5, 0"/>
+                </StackLayout.Padding>
+
+                <StackLayout>
+                    <Label Text="To" FontSize="Default"/>
+                    <Picker ItemsSource="{Binding CurrenciesNames}"
+                        SelectedItem="{Binding CurrencyTo}"/>
+                </StackLayout>
+                
+                <ScrollView Orientation="Horizontal"
+                            HorizontalOptions="EndAndExpand"
+                            VerticalOptions="End">
+                    <Label Text="{Binding ConvertedAmount}"
+                       TextColor="{Binding Source={x:Reference Name=ThisPage},
+                                           Path=AmountsColor}"
+                       HorizontalOptions="EndAndExpand"/>
+                </ScrollView>
+            </StackLayout>
+
+            <Button Text="1"
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Command="{Binding AddNumberCommand}"
+                    CommandParameter="1"/>
+            <Button Text="2"
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Command="{Binding AddNumberCommand}"
+                    CommandParameter="2"/>
+            <Button Text="3"
+                    Grid.Row="3"
+                    Grid.Column="2"
+                    Command="{Binding AddNumberCommand}"
+                    CommandParameter="3"/>
+            <Button Text="4"
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Command="{Binding AddNumberCommand}"
+                    CommandParameter="4"/>
+            <Button Text="5"
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Command="{Binding AddNumberCommand}"
+                    CommandParameter="5"/>
+            <Button Text="6"
+                    Grid.Row="4"
+                    Grid.Column="2"
+                    Command="{Binding AddNumberCommand}"
+                    CommandParameter="6"/>
+            <Button Text="7"
+                    Grid.Row="5"
+                    Grid.Column="0"
+                    Command="{Binding AddNumberCommand}"
+                    CommandParameter="7"/>
+            <Button Text="8"
+                    Grid.Row="5"
+                    Grid.Column="1"
+                    Command="{Binding AddNumberCommand}"
+                    CommandParameter="8"/>
+            <Button Text="9"
+                    Grid.Row="5"
+                    Grid.Column="2"
+                    Command="{Binding AddNumberCommand}"
+                    CommandParameter="9"/>
+            <Button Text="0"
+                    Grid.Row="6"
+                    Grid.Column="1"
+                    Command="{Binding AddZeroCommand}"/>
+            <Button Text="."
+                    Grid.Row="6"
+                    Grid.Column="2"
+                    Command="{Binding AddDotCommand}"/>
+            <Button Text="C"
+                    Grid.Row="3"
+                    Grid.RowSpan="2"
+                    Grid.Column="3"
+                    Command="{Binding RemoveAllCommand}"/>
+            <Button Grid.Row="5"
+                    Grid.RowSpan="2"
+                    Grid.Column="3"
+                    Command="{Binding RemoveSymbolCommand}">
+                <Button.Image>
+                    <OnPlatform x:TypeArguments="FileImageSource"
+                                WinPhone="Resources/Images/clear_symbol_50px.png"
+                                Android="clear_symbol.png"/>
+                </Button.Image>
+            </Button>
+            <Button x:Name="saveButton"
+                    IsEnabled="{Binding IsAllLoaded}"
+                    Grid.Row="6"
+                    Grid.Column="0"
+                    Command="{Binding SaveCommand}"
+                    ImageSource="{Binding Source={x:Reference Name=ThisPage},
+                                          Path=SaveButtonImage}">
+                <Button.BorderColor>
+                    <OnPlatform x:TypeArguments="Color"
+                                Android="#2e7d32"/>
+                </Button.BorderColor>
+                <Button.BackgroundColor>
+                    <OnPlatform x:TypeArguments="Color"
+                                Android="#2e7d32"/>
+                </Button.BackgroundColor>
+            </Button>
+        </Grid>
+    </AbsoluteLayout>
+</ContentPage>
