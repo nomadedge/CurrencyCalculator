@@ -15,7 +15,8 @@ namespace CurrencyCalculator.ViewModels
         private const int _historySize = 10;
         private const string _placeholder = "100";
 
-        private readonly IPageService _iPageService;
+        private readonly IPageService _pageService;
+        private readonly ICurrencyRateGetter _currencyRateGetter;
         private readonly CurrencyRateService _currencyRateService;
         private string _amount;
         private string _convertedAmount;
@@ -164,13 +165,14 @@ namespace CurrencyCalculator.ViewModels
         public event EventHandler ConversionSaved;
         public event EventHandler<bool> PlaceholderSet;
 
-        public CalculatorViewModel(IPageService pageService)
+        public CalculatorViewModel(IPageService pageService, ICurrencyRateGetter currencyRateGetter)
         {
             IsSaved = true;
             _historyDb = DependencyService.Get<ISQLiteDb>().GetConnection();
             GetHistoryFromDb();
+            _currencyRateGetter = currencyRateGetter;
             _currencyRateService = new CurrencyRateService();
-            _iPageService = pageService;
+            _pageService = pageService;
             Amount = "";
             SetCurrenciesNames();
             IsPlaceholder = true;
@@ -208,19 +210,19 @@ namespace CurrencyCalculator.ViewModels
             IsRatesLoaded = false;
             try
             {
-                _currencyRateService.Currencies = await CBRCurrencyRateService.GetRates(RateDate);
-                IsRatesLoaded = true;
+                _currencyRateService.Currencies = await _currencyRateGetter.GetRates(RateDate);
                 if (string.IsNullOrWhiteSpace(Amount))
                 {
                     Amount = _placeholder;
                     IsPlaceholder = true;
                 }
+                IsRatesLoaded = true;
                 ConvertedAmount = _currencyRateService.Convert
                         (Amount, CurrencyFrom, CurrencyTo);
             }
             catch (Exception)
             {
-                await _iPageService.DisplayAlert(
+                await _pageService.DisplayAlert(
                     "No internet connection",
                     "Do you want to try again?",
                     "Try again");
@@ -337,7 +339,7 @@ namespace CurrencyCalculator.ViewModels
         {
             if (Amount == "0")
             {
-                await _iPageService.DisplayAlert(
+                await _pageService.DisplayAlert(
                     "Invalid amount",
                     "You can't save conversion with zero amount.",
                     "OK");

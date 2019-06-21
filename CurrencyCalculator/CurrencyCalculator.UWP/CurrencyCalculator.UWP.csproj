@@ -149,9 +149,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Net.Http">
-      <Version>2.2.29</Version>
-    </PackageReference>
     <PackageReference Include="Portable.Text.Encoding">
       <Version>0.8.3</Version>
     </PackageReference>

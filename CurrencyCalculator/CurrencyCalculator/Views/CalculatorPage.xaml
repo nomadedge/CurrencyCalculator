@@ -83,7 +83,7 @@
                             MinimumDate="01/01/1999"
                             MaximumDate="{x:Static sys:DateTime.Today}"
                             Date="{Binding RateDate, Mode=OneWayToSource}"
-                            IsEnabled="{Binding IsLoaded}"/>
+                            IsEnabled="{Binding IsRatesLoaded}"/>
             </StackLayout>
 
             <StackLayout Orientation="Horizontal"

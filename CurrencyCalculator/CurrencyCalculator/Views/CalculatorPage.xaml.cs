@@ -1,4 +1,5 @@
-﻿using CurrencyCalculator.ViewModels;
+﻿using CurrencyCalculator.Models;
+using CurrencyCalculator.ViewModels;
 using System;
 using System.Timers;
 using Xamarin.Forms;
@@ -51,7 +52,7 @@ namespace CurrencyCalculator
             InitializeComponent();
             AmountsColor = _placeholderColor;
 
-            ViewModel = new CalculatorViewModel(new PageService());
+            ViewModel = new CalculatorViewModel(new PageService(), new CBRCurrencyRateGetter());
             ViewModel.ConversionSaved += OnConversionSaved;
             ViewModel.PlaceholderSet += OnPlaceholderSet;
 
