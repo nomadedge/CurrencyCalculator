@@ -231,24 +231,6 @@ namespace CurrencyCalculator.ViewModels
             }
         }
 
-        //public string AmountOnScreen()
-        //{
-        //    var parts = _amount.Split('.');
-        //    if (parts[0].Length <= 3)
-        //        return _amount;
-
-        //    var outString = "";
-        //    var remainder = parts[0].Length % 3;
-        //    outString += _amount[0];
-        //    for (int i = 1; i < parts[0].Length; i++)
-        //    {
-        //        if (i % 3 == remainder)
-        //            outString += ",";
-        //        outString += _amount[i];
-        //    }
-        //    return outString;
-        //}
-
         private void AddNumber(string numberText)
         {
             if (IsPlaceholder)
@@ -353,8 +335,8 @@ namespace CurrencyCalculator.ViewModels
                 RateDate = RateDate,
                 CurrencyFrom = CurrencyFrom,
                 CurrencyTo = CurrencyTo,
-                FromValue = Amount,
-                ToValue = ConvertedAmount,
+                FromValue = decimal.Parse(Amount),
+                ToValue = decimal.Parse(ConvertedAmount),
                 ConversionDateTime = DateTime.Now
             };
 

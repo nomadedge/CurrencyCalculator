@@ -26,6 +26,12 @@
                                     Android="#F5F5F5"/>
                     </Setter.Value>
                 </Setter>
+                <Setter Property="BorderRadius">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:Int32"
+                                    Android="0"/>
+                    </Setter.Value>
+                </Setter>
             </Style>
             <Style TargetType="Label">
                 <Setter Property="FontSize" Value="Medium"/>
@@ -39,7 +45,7 @@
 
     <AbsoluteLayout>
         <BoxView BackgroundColor="#E1E1E1"
-                 AbsoluteLayout.LayoutBounds="0, 0, 1, 0.435"
+                 AbsoluteLayout.LayoutBounds="0, 0, 1, 0.43"
                  AbsoluteLayout.LayoutFlags="All">
             <BoxView.BackgroundColor>
                 <OnPlatform x:TypeArguments="Color"

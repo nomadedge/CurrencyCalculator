@@ -24,14 +24,14 @@
                         <StackLayout Spacing="0" Padding="5, 0">
                             <StackLayout Orientation="Horizontal">
                                 <Label Text="Date:"/>
-                                <Label Text="{Binding RateDate, StringFormat='{0:MMM dd yyyy}'}"/>
+                                <Label Text="{Binding RateDate, StringFormat='{0:d}'}"/>
                             </StackLayout>
 
                             <StackLayout Orientation="Horizontal">
                                 <Label Text="From:"/>
                                 <Label Text="{Binding CurrencyFrom}"/>
 
-                                <Label Text="{Binding FromValue}"
+                                <Label Text="{Binding FromValue, StringFormat='{0:0.00}'}"
                                        HorizontalOptions="EndAndExpand"/>
                             </StackLayout>
 
@@ -39,7 +39,7 @@
                                 <Label Text="To:"/>
                                 <Label Text="{Binding CurrencyTo}"/>
 
-                                <Label Text="{Binding ToValue}"
+                                <Label Text="{Binding ToValue, StringFormat='{0:0.00}'}"
                                        HorizontalOptions="EndAndExpand"/>
                             </StackLayout>
                         </StackLayout>

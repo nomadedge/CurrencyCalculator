@@ -1,6 +1,7 @@
 ﻿using Portable.Text;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -17,16 +18,15 @@ namespace CurrencyCalculator.Models
                 throw new ArgumentNullException("date");
 
             var url = _url + date.ToString("dd/MM/yyyy");
-            using (var client = new HttpClient())
-            {
-                var win1251Bytes = await client.GetByteArrayAsync(url);
+            var client = new HttpClient();
 
-                var utf8String = Win1251BytesToUtf8String(win1251Bytes);
+            var win1251Bytes = await client.GetByteArrayAsync(url);
 
-                var rates = GetRatesFromXml(utf8String);
-                rates.Add(new CurrencyRate("Russian ruble", 1m));
-                return rates;
-            }
+            var utf8String = Win1251BytesToUtf8String(win1251Bytes);
+
+            var rates = GetRatesFromXml(utf8String);
+            rates.Add(new CurrencyRate("Russian ruble", 1m));
+            return rates;
         }
 
         private string Win1251BytesToUtf8String(byte[] win1251Bytes)
@@ -47,8 +47,19 @@ namespace CurrencyCalculator.Models
             foreach (var valute in valutes)
             {
                 var name = valute.Element("Name").Value;
-                var nominal = decimal.Parse(valute.Element("Nominal").Value.Replace(',', '.'));
-                var value = decimal.Parse(valute.Element("Value").Value.Replace(',', '.'));
+                var lang = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+                decimal nominal;
+                decimal value;
+                if (lang.ToLower() != "ru")
+                {
+                    nominal = decimal.Parse(valute.Element("Nominal").Value.Replace(',', '.'));
+                    value = decimal.Parse(valute.Element("Value").Value.Replace(',', '.'));
+                }
+                else
+                {
+                    nominal = decimal.Parse(valute.Element("Nominal").Value);
+                    value = decimal.Parse(valute.Element("Value").Value);
+                }
                 var rate = value / nominal;
                 rates.Add(new CurrencyRate(name, rate));
             }
