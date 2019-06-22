@@ -168,6 +168,9 @@ namespace CurrencyCalculator.ViewModels
         public CalculatorViewModel(IPageService pageService, ICurrencyRateGetter currencyRateGetter)
         {
             IsSaved = true;
+            IsRatesLoaded = false;
+            IsHistoryLoaded = false;
+            IsAllLoaded = false;
             _historyDb = DependencyService.Get<ISQLiteDb>().GetConnection();
             GetHistoryFromDb();
             _currencyRateGetter = currencyRateGetter;

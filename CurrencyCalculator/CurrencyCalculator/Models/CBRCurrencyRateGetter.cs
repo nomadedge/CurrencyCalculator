@@ -47,19 +47,11 @@ namespace CurrencyCalculator.Models
             foreach (var valute in valutes)
             {
                 var name = valute.Element("Name").Value;
-                var lang = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
-                decimal nominal;
-                decimal value;
-                if (lang.ToLower() != "ru")
-                {
-                    nominal = decimal.Parse(valute.Element("Nominal").Value.Replace(',', '.'));
-                    value = decimal.Parse(valute.Element("Value").Value.Replace(',', '.'));
-                }
-                else
-                {
-                    nominal = decimal.Parse(valute.Element("Nominal").Value);
-                    value = decimal.Parse(valute.Element("Value").Value);
-                }
+
+                var RussianCulture = new CultureInfo("ru-RU");
+                decimal nominal = Convert.ToDecimal(valute.Element("Nominal").Value, RussianCulture);
+                decimal value = Convert.ToDecimal(valute.Element("Value").Value, RussianCulture);
+
                 var rate = value / nominal;
                 rates.Add(new CurrencyRate(name, rate));
             }

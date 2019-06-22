@@ -6,6 +6,14 @@
              mc:Ignorable="d"
              x:Class="CurrencyCalculator.HistoryPage">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentView Padding="0">
         <ListView ItemsSource="{Binding History}"
                   ItemSelected="History_ItemSelected">

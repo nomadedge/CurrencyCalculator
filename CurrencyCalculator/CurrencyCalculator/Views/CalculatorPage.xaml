@@ -12,7 +12,7 @@
         <ResourceDictionary>
             <Style TargetType="Button">
                 <Setter Property="FontSize" Value="Large"/>
-                <Setter Property="IsEnabled" Value="{Binding IsRatesLoaded}"/>
+                <Setter Property="IsEnabled" Value="{Binding IsAllLoaded}"/>
                 <Setter Property="FontAttributes" Value="Bold"/>
                 <Setter Property="BorderColor">
                     <Setter.Value>
@@ -148,64 +148,77 @@
                     Grid.Row="3"
                     Grid.Column="0"
                     Command="{Binding AddNumberCommand}"
+                    IsEnabled="{Binding IsRatesLoaded}"
                     CommandParameter="1"/>
             <Button Text="2"
                     Grid.Row="3"
                     Grid.Column="1"
                     Command="{Binding AddNumberCommand}"
+                    IsEnabled="{Binding IsRatesLoaded}"
                     CommandParameter="2"/>
             <Button Text="3"
                     Grid.Row="3"
                     Grid.Column="2"
                     Command="{Binding AddNumberCommand}"
+                    IsEnabled="{Binding IsRatesLoaded}"
                     CommandParameter="3"/>
             <Button Text="4"
                     Grid.Row="4"
                     Grid.Column="0"
                     Command="{Binding AddNumberCommand}"
+                    IsEnabled="{Binding IsRatesLoaded}"
                     CommandParameter="4"/>
             <Button Text="5"
                     Grid.Row="4"
                     Grid.Column="1"
                     Command="{Binding AddNumberCommand}"
+                    IsEnabled="{Binding IsRatesLoaded}"
                     CommandParameter="5"/>
             <Button Text="6"
                     Grid.Row="4"
                     Grid.Column="2"
                     Command="{Binding AddNumberCommand}"
+                    IsEnabled="{Binding IsRatesLoaded}"
                     CommandParameter="6"/>
             <Button Text="7"
                     Grid.Row="5"
                     Grid.Column="0"
                     Command="{Binding AddNumberCommand}"
+                    IsEnabled="{Binding IsRatesLoaded}"
                     CommandParameter="7"/>
             <Button Text="8"
                     Grid.Row="5"
                     Grid.Column="1"
                     Command="{Binding AddNumberCommand}"
+                    IsEnabled="{Binding IsRatesLoaded}"
                     CommandParameter="8"/>
             <Button Text="9"
                     Grid.Row="5"
                     Grid.Column="2"
                     Command="{Binding AddNumberCommand}"
+                    IsEnabled="{Binding IsRatesLoaded}"
                     CommandParameter="9"/>
             <Button Text="0"
                     Grid.Row="6"
                     Grid.Column="1"
-                    Command="{Binding AddZeroCommand}"/>
+                    Command="{Binding AddZeroCommand}"
+                    IsEnabled="{Binding IsRatesLoaded}"/>
             <Button Text="."
                     Grid.Row="6"
                     Grid.Column="2"
-                    Command="{Binding AddDotCommand}"/>
+                    Command="{Binding AddDotCommand}"
+                    IsEnabled="{Binding IsRatesLoaded}"/>
             <Button Text="C"
                     Grid.Row="3"
                     Grid.RowSpan="2"
                     Grid.Column="3"
-                    Command="{Binding RemoveAllCommand}"/>
+                    Command="{Binding RemoveAllCommand}"
+                    IsEnabled="{Binding IsRatesLoaded}"/>
             <Button Grid.Row="5"
                     Grid.RowSpan="2"
                     Grid.Column="3"
-                    Command="{Binding RemoveSymbolCommand}">
+                    Command="{Binding RemoveSymbolCommand}"
+                    IsEnabled="{Binding IsRatesLoaded}">
                 <Button.Image>
                     <OnPlatform x:TypeArguments="FileImageSource"
                                 WinPhone="Resources/Images/clear_symbol_50px.png"
@@ -213,7 +226,6 @@
                 </Button.Image>
             </Button>
             <Button x:Name="saveButton"
-                    IsEnabled="{Binding IsAllLoaded}"
                     Grid.Row="6"
                     Grid.Column="0"
                     Command="{Binding SaveCommand}"
