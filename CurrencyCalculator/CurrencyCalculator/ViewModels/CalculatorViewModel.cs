@@ -208,7 +208,7 @@ namespace CurrencyCalculator.ViewModels
             IsHistoryLoaded = true;
         }
 
-        public async void GetRatesOnDate()
+        private async void GetRatesOnDate()
         {
             IsRatesLoaded = false;
             try
@@ -253,8 +253,7 @@ namespace CurrencyCalculator.ViewModels
             }
             else
             {
-                int numbersCount = Amount.Length;
-                if (numbersCount < _numbersCount)
+                if (Amount.Length < _numbersCount)
                     Amount += numberText;
             }
         }
@@ -322,7 +321,7 @@ namespace CurrencyCalculator.ViewModels
 
         private async void Save()
         {
-            if (Amount == "0")
+            if (Amount == "0" || Amount == "0.")
             {
                 await _pageService.DisplayAlert(
                     "Invalid amount",
