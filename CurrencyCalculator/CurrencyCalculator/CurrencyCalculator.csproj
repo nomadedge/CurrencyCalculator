@@ -13,7 +13,7 @@
   <ItemGroup>
     <PackageReference Include="Portable.Text.Encoding" Version="0.8.3" />
     <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
-    <PackageReference Include="Xamarin.Forms" Version="4.0.0.497661" />
+    <PackageReference Include="Xamarin.Forms" Version="4.0.0.540366" />
     <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
   </ItemGroup>
 
